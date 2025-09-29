@@ -1,0 +1,9 @@
+news_api:
+  key: "API_KEY"
+
+db:
+  user: postgres
+  password: My_Password
+  host: 127.0.0.1
+  port: 5432
+  name: newsdb
