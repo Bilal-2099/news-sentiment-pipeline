@@ -1,46 +1,53 @@
-# news-sentiment-pipeline
+📰 News Sentiment Analysis Pipeline
 
-# News Sentiment Analysis Pipeline
+This project extracts news data, performs sentiment analysis, and loads the results into PostgreSQL.
+It can be run directly or orchestrated with Apache Airflow for scheduling and automation.
 
-This project extracts news data, processes it for sentiment analysis, and loads the results into PostgreSQL.  
-It is managed through **Apache Airflow** for scheduling and orchestration.
-
----
-
-## Setup Instructions
-
-### Clone the Repository
-```bash
+⚙️ Setup Instructions
+1. Clone the Repository
 git clone https://github.com/Bilal-2099/news-sentiment-pipeline.git
 cd news-sentiment-pipeline
 
-## Create Enviroment
+2. Create Virtual Environment
 # Windows
 python -m venv venv
 venv\Scripts\activate
 
 # Linux / macOS
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 
-## Install Dependencies
+3. Install Dependencies
 pip install -r requirements.txt
 
-## Configuration
-Update the config/config.yaml file with your API keys, database credentials, and other parameters.
-Verify database connection settings match your PostgreSQL instance.
+4. Configure Settings
 
-## Run Without Airflow(Local Test)
+Update the config/config.yaml file with:
 
-Check if postgres is connected and working
+API keys
+
+PostgreSQL credentials
+
+Any other required parameters
+
+Make sure your PostgreSQL instance is running and accessible.
+
+▶️ Running Without Airflow (Local Test)
+
+Check PostgreSQL connection:
+
 python test.py
 
-Run the Pipeline
+
+Run the ETL pipeline:
+
 python run_etl.py
 
-## Running With Airflow
+⏱ Running With Apache Airflow
+Initialize Airflow
 airflow db init
-Create Admin User
+
+Create an Admin User
 airflow users create \
     --username admin \
     --password admin \
@@ -49,24 +56,35 @@ airflow users create \
     --role Admin \
     --email your@email.com
 
-Start Airflow Servies
+Start Airflow Services
 airflow webserver --port 8080
 airflow scheduler
 
-Add Your Dag
-Place your DAG file in the dags/ folder.
-Airflow will automatically pick it up.
 
-Project Workflow
+Then open http://localhost:8080
+ in your browser.
 
-Extract → Fetch news data from API.
-Transform → Perform sentiment analysis & clean the dataset.
-Load → Store processed results in PostgreSQL.
-Schedule → Automate with Airflow DAG.
+Add Your DAG
 
-Tech Stack
+Place your DAG file inside the dags/ folder.
+Airflow will automatically detect and load it.
+
+📂 Project Workflow
+
+Extract → Fetch news data from API
+
+Transform → Clean dataset & perform sentiment analysis
+
+Load → Store results in PostgreSQL
+
+Schedule → Automate with Airflow DAG
+
+🛠 Tech Stack
 
 Python 3.12
+
 Apache Airflow 3.0.6
+
 PostgreSQL
+
 Pandas, Requests, SQLAlchemy
